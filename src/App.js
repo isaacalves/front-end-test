@@ -1,25 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ListItem from 'components/ListItem';
+// import { getEmployees } from './api/rewardgateway'
+import employeesMockData from 'api/__mockData__/employees.json'
 
 class App extends Component {
+  
+  state = {
+    employess: []
+  }
+
+  componentDidMount() {
+    // getEmployees()
+    //   .then(data => {
+    //     // set employees state 
+    //   })
+    //   .catch(err => console.warn(err))
+
+    this.setState({
+      employees: employeesMockData.slice(0, 100)
+    })
+  }
+  
   render() {
+    
+    console.log(this.state.employees)
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Employees</h1>
+        <div className="container">
+          { this.state.employees &&
+            <>
+              <div className="total">Showing {this.state.employees.length} results</div>
+              <ul>
+                {
+                  this.state.employees.map((item, key) => (
+                    <ListItem
+                      name={item.name}
+                      avatar={item.avatar}
+                      title={item.title}
+                      company={item.company}
+                      bio={item.bio}
+                    />
+                  ))
+                }
+              </ul>
+            </>
+          }
+        </div>
       </div>
     );
   }
