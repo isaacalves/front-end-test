@@ -22,9 +22,6 @@ class App extends Component {
   }
   
   render() {
-    
-    console.log(this.state.employees)
-
     return (
       <div className="App">
         <h1>Employees</h1>
